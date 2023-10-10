@@ -7,6 +7,7 @@ from sklearn.datasets import fetch_openml
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.tree import DecisionTreeClassifier
@@ -101,3 +102,26 @@ ax = fig.add_subplot(111)
 pyplot.boxplot(results)
 ax.set_xticklabels(names)
 pyplot.show()
+
+# %%
+# Of the algorithms tested, KNN without scalar treatment obtained the best 
+# result, reaching 0.97%. However, a Gridsearch will be carried out in an 
+# attempt to improve the final result.
+
+from sklearn.metrics import accuracy_score
+
+param_grid = [{ 
+    "weights" : ['uniform', 'distance'],
+    "n_neighbors" : [1,3,5,7,10]
+}]
+knn_clf = KNeighborsClassifier()
+grid_search = GridSearchCV(knn_clf, param_grid, cv=5, verbose=2)
+grid_search.fit(X_train, y_train)
+
+#%%
+print(grid_search.best_params_)
+print(grid_search.best_score_)
+
+
+y_pred = grid_search.predict(X_test)
+accuracy_score(y_test, y_pred)
