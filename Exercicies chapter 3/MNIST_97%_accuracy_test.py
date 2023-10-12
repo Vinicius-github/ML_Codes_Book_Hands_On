@@ -123,5 +123,5 @@ print(grid_search.best_params_)
 print(grid_search.best_score_)
 
 
-y_pred = grid_search.predict(X_test)
+y_pred = grid_search.best_estimator_.predict(X_test)
 accuracy_score(y_test, y_pred)
