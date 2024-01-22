@@ -44,8 +44,8 @@ print(X_train.shape, y_train.shape)
 print(X_valid.shape, y_valid.shape)
 print(X_test.shape, y_test.shape)
 
-# Para conseguir rodar o Kmeans foi precisso fazer o reshape dos dados. Em geral para dados com muita dimensionalidade é necessário fazer este processo.
-# Poderia ter utilizado algum outro método como o PCA para reduzir a dimensionalidade. Mas neste caso não foi feito isso.
+# Para conseguir rodar o Kmeans foi precisso fazer o reshape dos dados, coloca-lo em 2D.
+# https://awari.com.br/reshape-em-python-aprenda-a-transformar-dados-de-forma-eficiente/
 X_train = X_train.reshape(-1, 4096)
 
 # Criando o modelo do K_means
